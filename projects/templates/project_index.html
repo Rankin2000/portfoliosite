@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block page_content %}
+<title>Projects | Stuart Rankin</title>
+<div class="container-fluid">
+<div class="col-md-8 offset-md-2">
+<h1>Projects</h1>
+{% for category in categories %}
+<h3>{{ category.name }}</h3>
+<hr>
+{% if category.description %}
+<p> {{ category.description }} </p>
+{% endif %}
+<div class="row">
+{% for project in category.projects.all %}
+    <div class="col-md-4">
+        <div class="card mb-2">
+            <div class="card-body">
+                <h5 class="card-title">{{ project.title }}</h5>
+		<p class="card-text">{{ project.description|truncatechars:75 }}</p>
+                <a href="{% url 'project_detail' project.pk %}"
+                   class="btn btn-primary">
+					  Read More >
+                </a>
+            </div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+{% endfor %}
+</div>
+</div>
+{% endblock %}

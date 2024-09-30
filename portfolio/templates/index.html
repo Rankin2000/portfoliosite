@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block page_content %}
+
+<title>Portfolio | Stuart Rankin</title>
+
+<div class="jumbotron text-center">
+    <h1 class="display-4">Welcome to My Portfolio</h1>
+    <p class="lead"> SOC Team Lead</p>
+</div>
+
+<div class="container-fluid pb-4">
+	<div class="col-md-8 offset-md-2">
+    <div class="row">
+        <div class="col-md-4">
+            <h2>About Me</h2>
+	    <p> Hi I'm Stuart, a SOC Team lead and Abertay Ethical Hacking grad. This site will be used as a portfolio and repository for any personal projects and posts. It will be updated periodically.</p>
+            <a class="btn btn-secondary" href="{% url 'about' %}">Learn More </a>
+        </div>
+        <div class="col-md-4">
+            <h2>Recent Projects</h2>
+            <ul class="list-unstyled">
+                {% for project in recentprojects %}
+		<li>
+			<a href="{% url 'project_detail' project.pk %}">{{ project.title}}</a>
+		</li>
+                {% endfor %}
+            </ul>
+            <a class="btn btn-secondary" href="{% url 'project_index' %}">See All Projects </a>
+        </div>
+        <div class="col-md-4">
+            <h2>Latest Blog Posts</h2>
+            <ul class="list-unstyled">
+                {% for blog in recentblog %}
+                <li><a href="{% url 'blog_detail' blog.pk %}">{{ blog.title }}</a></li>
+                {% endfor %}
+            </ul>
+            <a class="btn btn-secondary" href="{% url 'blog_index' %}">Read More</a>
+        </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
